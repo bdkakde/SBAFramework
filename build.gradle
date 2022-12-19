@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.0'
+}
+
+group 'com.company.automation'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.0.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '3.0.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.7.2'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.3.1'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.7.0'
+    implementation group: 'io.cucumber', name: 'cucumber-spring', version: '7.10.0'
+
+    implementation group: 'net.datafaker', name: 'datafaker', version: '1.7.0'
+
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.9.0'
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.9.0'
+    implementation group: 'io.cucumber', name: 'cucumber-gherkin', version: '7.9.0'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.9.0'
+
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+tasks.register('runSerial') {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--glue', 'com.company.automation.steps',
+                    'src/test/resources/features',
+            ]
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
