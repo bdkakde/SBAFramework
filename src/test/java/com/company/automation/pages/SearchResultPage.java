@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchResultPage extends BasePage {
 
-    @FindBy(xpath="//a[@class='a-link-normal s-no-outlineX']")
+    @FindBy(xpath="//a[@class='a-link-normal s-no-outline']")
     public WebElement resultImg;
 
     public boolean checkSearchResult() {
