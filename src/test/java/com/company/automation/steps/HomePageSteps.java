@@ -1,6 +1,7 @@
 package com.company.automation.steps;
 
 import com.company.automation.pages.HomePage;
+import com.company.automation.utils.DataGenerator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +15,8 @@ import org.testng.Assert;
 public class HomePageSteps {
 
     @Autowired
+    DataGenerator dataGenerator;
+    @Autowired
     public HomePage homePage;
 
     @Given("I open home page")
@@ -23,7 +26,8 @@ public class HomePageSteps {
 
     @When("I search product")
     public void iSearchProduct() {
-        homePage.searchProduct("4K TV");
+        //homePage.searchProduct("4K TV");
+        homePage.searchProduct(dataGenerator.getRandomProductName());
     }
 
     @Then("I see title as {string}")

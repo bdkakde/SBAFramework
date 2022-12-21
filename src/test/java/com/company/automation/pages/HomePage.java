@@ -1,19 +1,19 @@
 package com.company.automation.pages;
 
 import com.company.automation.selenium.SeleniumUtils;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HomePage extends BasePage {
 
-    @Lazy
+
     @Autowired
-    private SeleniumUtils seleniumUtils;
+    public SeleniumUtils seleniumUtils;
 
     @FindBy(id="twotabsearchtextbox")
     public WebElement searchTxb;
@@ -27,6 +27,7 @@ public class HomePage extends BasePage {
     public void launchHomePage() {
         driver.get(appURL);
         //seleniumUtils.launchApplication(appURL);
+        Allure.step("Application " + appURL + " app opened successfully");
         driver.manage().window().maximize();
     }
 
