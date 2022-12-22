@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 
-@CucumberContextConfiguration
-@SpringBootTest()
+//@CucumberContextConfiguration
+//@SpringBootTest()
 public class HomePageSteps {
 
     @Autowired
@@ -26,7 +26,6 @@ public class HomePageSteps {
 
     @When("I search product")
     public void iSearchProduct() {
-        //homePage.searchProduct("4K TV");
         homePage.searchProduct(dataGenerator.getRandomProductName());
     }
 
@@ -36,7 +35,7 @@ public class HomePageSteps {
         if(actTitle.equals(expTitle)) {
             Assert.assertEquals(actTitle, expTitle);
         } else {
-            Assert.assertNotEquals(actTitle, expTitle);
+            Assert.fail("Expected title [" + expTitle + "] and actual title ["  + actTitle +  "] did not matched!!!");
         }
     }
 

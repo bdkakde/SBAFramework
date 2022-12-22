@@ -17,24 +17,28 @@ java {
 
 dependencies {
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.0.0'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.0.3'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.7.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '3.0.0'
+    implementation group: 'io.cucumber', name: 'cucumber-spring', version: '7.10.1'
+
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.7.2'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.3.1'
-    testImplementation group: 'org.testng', name: 'testng', version: '7.7.0'
-    implementation group: 'io.cucumber', name: 'cucumber-spring', version: '7.10.0'
 
     implementation group: 'net.datafaker', name: 'datafaker', version: '1.7.0'
 
-    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.9.0'
-    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.9.0'
-    implementation group: 'io.cucumber', name: 'cucumber-gherkin', version: '7.9.0'
-    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.9.0'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.10.1'
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.10.1'
+    implementation group: 'io.cucumber', name: 'cucumber-gherkin', version: '7.10.1'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.10.1'
 
     implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.20.1'
     implementation group: 'io.qameta.allure', name: 'allure-attachments', version: '2.20.1'
     implementation group: 'io.qameta.allure', name: 'allure-java-commons', version: '2.20.1'
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.20.1'
     implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
+
+    implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'
 
 }
 

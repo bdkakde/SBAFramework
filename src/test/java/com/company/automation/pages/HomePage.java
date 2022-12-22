@@ -1,5 +1,6 @@
 package com.company.automation.pages;
 
+import com.company.automation.selenium.BasePage;
 import com.company.automation.selenium.SeleniumUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HomePage extends BasePage {
-
 
     @Autowired
     public SeleniumUtils seleniumUtils;
@@ -25,9 +25,8 @@ public class HomePage extends BasePage {
     private String appURL;
 
     public void launchHomePage() {
-        driver.get(appURL);
-        //seleniumUtils.launchApplication(appURL);
-        Allure.step("Application " + appURL + " app opened successfully");
+        //driver.get(appURL);
+        seleniumUtils.launchApplication(appURL);
         driver.manage().window().maximize();
     }
 
@@ -36,7 +35,9 @@ public class HomePage extends BasePage {
     }
 
     public void searchProduct(String input) {
-        searchTxb.sendKeys(input);
-        searchBtn.click();
+        //searchTxb.sendKeys(input);
+        //searchBtn.click();
+        seleniumUtils.enterText(searchTxb, input);
+        seleniumUtils.clickElement(searchBtn);
     }
 }

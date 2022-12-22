@@ -1,5 +1,6 @@
 package com.company.automation.pages;
 
+import com.company.automation.selenium.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
