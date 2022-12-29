@@ -1,6 +1,7 @@
 package com.company.automation.steps;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.OutputType;
@@ -13,12 +14,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest()
 public class CucumberHook {
 
-    @Autowired
-    protected WebDriver driver;
+    //@Autowired
+    //protected WebDriver driver;
 
+/*    @AfterStep
+    public void afterStep(Scenario scenario) {
+        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", scenario.getName());
+    }
     @After
     public void tearDown(Scenario scenario) {
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", scenario.getName());
-    }
+    }*/
 }

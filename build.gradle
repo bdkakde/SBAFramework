@@ -15,30 +15,43 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+ext {
+    springBootVersion = '3.0.1'
+    allureVersion = '2.20.1'
+    cucumberVerion = '7.10.1'
+    seleniumVersion = '4.7.2'
+    testNGVersion = '7.7.0'
+    webDriverManagerVersion = '5.3.1'
+    dataFakerVersion = '1.7.0'
+}
+
+
+
 dependencies {
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.0.0'
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
     testImplementation group: 'org.springframework', name: 'spring-test', version: '6.0.3'
-    testImplementation group: 'org.testng', name: 'testng', version: '7.7.0'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '3.0.0'
+    testImplementation group: 'org.testng', name: 'testng', version: testNGVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: springBootVersion
     implementation group: 'io.cucumber', name: 'cucumber-spring', version: '7.10.1'
 
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.7.2'
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.3.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: webDriverManagerVersion
 
-    implementation group: 'net.datafaker', name: 'datafaker', version: '1.7.0'
+    implementation group: 'net.datafaker', name: 'datafaker', version: dataFakerVersion
 
-    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.10.1'
-    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.10.1'
-    implementation group: 'io.cucumber', name: 'cucumber-gherkin', version: '7.10.1'
-    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '7.10.1'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: cucumberVerion
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: cucumberVerion
+    implementation group: 'io.cucumber', name: 'cucumber-gherkin', version: cucumberVerion
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: cucumberVerion
 
-    implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.20.1'
-    implementation group: 'io.qameta.allure', name: 'allure-attachments', version: '2.20.1'
-    implementation group: 'io.qameta.allure', name: 'allure-java-commons', version: '2.20.1'
-    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.20.1'
+    implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: allureVersion
+    implementation group: 'io.qameta.allure', name: 'allure-attachments', version: allureVersion
+    implementation group: 'io.qameta.allure', name: 'allure-java-commons', version: allureVersion
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: allureVersion
     implementation group: 'com.github.automatedowl', name: 'allure-environment-writer', version: '1.0.0'
 
     implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.5'
 
 }
 
@@ -58,11 +71,8 @@ tasks.register('runSerial') {
                     '--glue', 'com.company.automation.steps',
                     'src/test/resources/features',
                     '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm',
+                    '--plugin', 'com.company.automation.listerners.CustomCucumberListener',
             ]
         }
     }
-}
-
-test {
-    useJUnitPlatform()
 }

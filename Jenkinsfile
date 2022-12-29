@@ -1,24 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Clone Git Repo') {
             steps {
-                // Get code from a GitHub repository
-                echo 'Pulling code from github repository'
-                git url: 'https://github.com/bdkakde/SBAFramework.git/', branch: 'main',
+                echo '***** Pulling code from github repository *****'
+                git 'https://github.com/bdkakde/SBAFramework.git/',
                  credentialsId: 'github_creds'
             }
         }
          stage('Run Tests') {
-                    steps {
-                        gradle runSerial tests
-                    }
+                steps {
+                     echo '***** Execution started for scenarios *****'
+                     gradle runSerial tests
+                }
          }
 
-          stage('Generate report') {
+          stage('Publish Reports') {
                  steps {
-                           allure serve allure-results
-                        }
+                        echo "***** Publish Reports *****"
+                        allure serve allure-results
+                        echo '***** Report generated successfully *****'
+                 }
           }
     }
 }
