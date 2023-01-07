@@ -3,28 +3,17 @@ package com.company.automation.selenium;
 import com.company.automation.exceptions.ActionFailedException;
 import com.company.automation.reporter.AllureReportManager;
 import io.qameta.allure.Allure;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 
 @Component
-public class SeleniumActions extends BasePage {
+public class SeleniumActions extends BaseDriver {
 
     @Autowired
     AllureReportManager allureReportManager;
@@ -48,7 +37,6 @@ public class SeleniumActions extends BasePage {
             driver.get(url);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
             allureReportManager.passStep("Application [%s] opened successfully", url);
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new ActionFailedException(e.getMessage());
@@ -62,7 +50,7 @@ public class SeleniumActions extends BasePage {
             allureReportManager.passStep("Text [%s] entered into text box [%s] successfully", text, locator(element));
         } catch (Exception e) {
             e.printStackTrace();
-            allureReportManager.failStep("Failed to enter text %s into text box %s ", text, locator(element));
+            allureReportManager.failStep("Failed to enter text [%s] into text box [%s] ", text, locator(element));
             throw new ActionFailedException(e.getMessage());
         }
     }
@@ -105,47 +93,13 @@ public class SeleniumActions extends BasePage {
               allureReportManager.passStep("Element [%s] found successfully", locator(element));
               flag = true;
           } else {
-              allureReportManager.failStep("Failed to found element [%s] ", locator(element));
-
+              allureReportManager.failStep("Failed to find element [%s] ", locator(element));
           }
         } catch (Exception e) {
-            //getScreenshot();
             e.printStackTrace();
             throw new AssertionError(e.getMessage());
         }
         return flag;
-    }
-
-    public void getScreenshot() {
-
-        System.out.println("********* Entering getScreenshot ************ ");
-        File screenshotBase64Data = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        System.out.println("%%%%%%%%%%%%%%% " + screenShotPath);
-        try {
-            FileUtils.copyFile(screenshotBase64Data, new File("E:\\Workspace\\SBAFramework\\src\\test\\resources\\screenshots"));
-            Path content = Paths.get(screenShotPath);
-            System.out.println("%%%%%%%%%%%%%%% " + content);
-            try (InputStream is = Files.newInputStream(content)) {
-                Allure.addAttachment("methodName", is);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public String captureScreen() {
-        String path;
-        try {
-            File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            path = screenShotPath + File.separator + source.getName();
-            FileUtils.copyFile(source, new File(path));
-        }
-        catch(IOException e) {
-            path = "Failed to capture screenshot: " + e.getMessage();
-        }
-        System.out.println("%%%%%%%%%%%%% " + path);
-        return path;
     }
  }
 

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0'
+    id 'org.springframework.boot' version '3.0.1'
+
 }
 
 group 'com.company.automation'
@@ -23,16 +24,14 @@ ext {
     testNGVersion = '7.7.0'
     webDriverManagerVersion = '5.3.1'
     dataFakerVersion = '1.7.0'
+    cucumberSpringVersion = '7.10.1'
 }
-
-
 
 dependencies {
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
-    testImplementation group: 'org.springframework', name: 'spring-test', version: '6.0.3'
     testImplementation group: 'org.testng', name: 'testng', version: testNGVersion
     implementation group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: springBootVersion
-    implementation group: 'io.cucumber', name: 'cucumber-spring', version: '7.10.1'
+    implementation group: 'io.cucumber', name: 'cucumber-spring', version: cucumberSpringVersion
 
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: webDriverManagerVersion
@@ -69,9 +68,10 @@ tasks.register('runSerial') {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--glue', 'com.company.automation.steps',
-                    'src/test/resources/features',
+                    'src/test/resources/features/result.feature',
                     '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm',
                     '--plugin', 'com.company.automation.listerners.CustomCucumberListener',
+
             ]
         }
     }

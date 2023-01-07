@@ -4,6 +4,7 @@ import org.openqa.selenium.BuildInfo;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
@@ -11,7 +12,7 @@ import java.net.UnknownHostException;
 
 @Component
 public class EnvironmentUtils {
-	
+
 	private Capabilities cap;
 
 	public String getSystemIpAddress(){

@@ -17,7 +17,7 @@ public class WebDriverFactory {
     @ConditionalOnProperty(name = "browser", havingValue = "chrome")
     public WebDriver initializeChromeDriver() {
         System.out.println("--- Initializing chrome driver ----");
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().disableCsp().setup();
         return new ChromeDriver();
     }
 
