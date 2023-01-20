@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 
 @Component
-public class SeleniumActions extends BaseDriver {
+public class SeleniumActions extends BasePage {
 
     @Autowired
     AllureReportManager allureReportManager;
@@ -101,5 +101,5 @@ public class SeleniumActions extends BaseDriver {
         }
         return flag;
     }
- }
+}
 

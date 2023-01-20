@@ -1,11 +1,16 @@
 package com.company.automation.reporter;
 
-import com.company.automation.selenium.BaseDriver;
+import com.company.automation.listerners.CustomCucumberListener;
 import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.model.Status;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -13,12 +18,15 @@ import java.util.Objects;
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 @Component
-public class AllureReportManager extends BaseDriver {
+public class AllureReportManager {
 
     @Autowired
     EnvironmentUtils environmentUtils;
 
+    @Autowired
+    protected WebDriver driver;
 
+    private final Logger LOGGER = LoggerFactory.getLogger(AllureReportManager.class);
     public void setAllureEnvironmentInformation() {
 
         allureEnvironmentWriter(
@@ -39,9 +47,15 @@ public class AllureReportManager extends BaseDriver {
 
     public void passStep(String message, Object... arg) {
         Allure.step(String.format(message, arg), Status.PASSED);
+        takeScreenShot();
     }
 
     public void failStep(String message, Object... arg) {
         Allure.step(String.format(message, arg), Status.FAILED);
     }
-}
+
+    @Attachment(value = "Test screenshot", type = "image/jpg")
+    public void takeScreenShot() {
+        Allure.getLifecycle().addAttachment("screen", "image/jpg", "jpg", ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+    }
+ }

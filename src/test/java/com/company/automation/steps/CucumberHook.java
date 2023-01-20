@@ -1,25 +1,22 @@
 package com.company.automation.steps;
 
-import com.company.automation.selenium.BaseDriver;
+import com.company.automation.selenium.WebDriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
-import io.qameta.allure.Allure;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.ByteArrayInputStream;
 
 @CucumberContextConfiguration
 @SpringBootTest()
-public class CucumberHook extends BaseDriver {
+public class CucumberHook {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(CucumberHook.class);
     @After
-    public void afterStep(Scenario scenario){
+    public void afterStep(Scenario scenario) {
         if (scenario.isFailed()) {
-            Allure.addAttachment(scenario.getName(), "image/png", new ByteArrayInputStream(
-                    ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)), "png");
+            LOGGER.info("FAILED SCENARIO: " + scenario);
         }
     }
 }

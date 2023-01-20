@@ -1,6 +1,6 @@
 package com.company.automation.pages;
 
-import com.company.automation.selenium.BaseDriver;
+import com.company.automation.selenium.BasePage;
 import com.company.automation.selenium.SeleniumActions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HomePage extends BaseDriver {
+public class HomePage extends BasePage {
 
     @Autowired
     public SeleniumActions seleniumActions;
