@@ -27,6 +27,7 @@ public class AllureReportManager {
     protected WebDriver driver;
 
     private final Logger LOGGER = LoggerFactory.getLogger(AllureReportManager.class);
+
     public void setAllureEnvironmentInformation() {
 
         allureEnvironmentWriter(
@@ -47,7 +48,6 @@ public class AllureReportManager {
 
     public void passStep(String message, Object... arg) {
         Allure.step(String.format(message, arg), Status.PASSED);
-        takeScreenShot();
     }
 
     public void failStep(String message, Object... arg) {
@@ -58,4 +58,4 @@ public class AllureReportManager {
     public void takeScreenShot() {
         Allure.getLifecycle().addAttachment("screen", "image/jpg", "jpg", ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
     }
- }
+}

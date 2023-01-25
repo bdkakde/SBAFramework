@@ -20,7 +20,7 @@ ext {
     springBootVersion = '3.0.1'
     allureVersion = '2.20.1'
     cucumberVerion = '7.10.1'
-    seleniumVersion = '4.7.2'
+    seleniumVersion = '4.8.0'
     testNGVersion = '7.7.0'
     webDriverManagerVersion = '5.3.1'
     dataFakerVersion = '1.7.0'
@@ -60,6 +60,8 @@ configurations {
     }
 }
 
+def tags = {"@cart-remove"}
+
 tasks.register('runSerial') {
     dependsOn assemble, testClasses
     doLast {
@@ -68,11 +70,9 @@ tasks.register('runSerial') {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--glue', 'com.company.automation.steps',
-                    'src/test/resources/features/result.feature',
+                    'src/test/resources/features/shoppingCart.feature',
                     '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm',
                     '--plugin', 'com.company.automation.listerners.CustomCucumberListener',
-
-
             ]
         }
     }

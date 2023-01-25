@@ -16,7 +16,15 @@ public class SearchResultPage extends BasePage {
     @FindBy(xpath="//a[@class='a-link-normal s-no-outline']")
     public WebElement resultImg;
 
+    @FindBy(xpath="//div[@class='a-section a-spacing-none puis-padding-right-small s-title-instructions-style']//h2/a")
+    public WebElement productLink;
+
     public boolean checkSearchResult() {
         return seleniumActions.isElementVisible(resultImg);
+   }
+
+   public ProductDetailsPage clickProductLink() {
+        seleniumActions.clickElement(productLink);
+        return new ProductDetailsPage();
    }
 }

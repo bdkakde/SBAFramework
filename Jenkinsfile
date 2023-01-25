@@ -1,6 +1,19 @@
 pipeline {
     agent any
+
+    environment {
+    		CC = 'Starting pipeline...'
+    	}
+
     stages {
+
+        stage('Clean') {
+                    steps {
+                         echo '***** Cleaning workspace *****'
+                         gradle clean
+                    }
+             }
+
         stage('Clone Git Repo') {
             steps {
                 echo '***** Pulling code from github repository *****'
@@ -22,5 +35,11 @@ pipeline {
                         echo '***** Report generated successfully *****'
                  }
           }
+
+          stage('Deploy') {
+          			steps {
+          				echo "***** Deploying... *****"
+          			}
+          		}
     }
 }

@@ -1,11 +1,15 @@
 package com.company.automation.listerners;
 
+import com.company.automation.reporter.AllureReportManager;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
+
 
 
 public class CustomCucumberListener implements ConcurrentEventListener {
@@ -16,13 +20,16 @@ public class CustomCucumberListener implements ConcurrentEventListener {
     @Override
     public void setEventPublisher(EventPublisher publisher) {
 
+        publisher.registerHandlerFor(TestRunStarted.class, this::testRunStartedHandler);
+        publisher.registerHandlerFor(TestRunFinished.class, this::testRunFinishedHandler);
+
         publisher.registerHandlerFor(TestCaseStarted.class, this::scenarioStartedHandler);
         publisher.registerHandlerFor(TestCaseFinished.class, this::scenarioFinishHandler);
 
         publisher.registerHandlerFor(TestStepStarted.class, this::testStepStartedHandler);
         publisher.registerHandlerFor(TestStepFinished.class, this::testStepFinishedHandler);
 
-        publisher.registerHandlerFor(TestRunFinished.class, this::testRunFinishedHandler);
+
     }
 
     private void scenarioStartedHandler(TestCaseStarted event) {
@@ -38,8 +45,9 @@ public class CustomCucumberListener implements ConcurrentEventListener {
             TestCase testCase = event.getTestCase();
             String scenarioName = testCase.getName();
             LOGGER.info("Scenario [{}] completed", scenarioName);
+            LOGGER.info("SCENARIO : " + scenarioName + " -> " + event.getResult().getStatus());
         }
-        //allureReportManager.setAllureEnvironmentInformation();
+
     }
 
     private void testStepStartedHandler(TestStepStarted event) {
@@ -57,6 +65,13 @@ public class CustomCucumberListener implements ConcurrentEventListener {
     }
 
     private void testRunFinishedHandler(TestRunFinished event) {
+
+        if (event.getInstant() != null) {
+            Instant instance = event.getInstant();
+        }
+    }
+
+    private synchronized void testRunStartedHandler(TestRunStarted event) {
 
         if (event.getInstant() != null) {
             Instant instance = event.getInstant();
