@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-    		echo 'Starting pipeline...'
-    	}
-
     stages {
 
         stage('Clean') {
@@ -17,7 +13,7 @@ pipeline {
         stage('Clone Git Repo') {
             steps {
                 echo '***** Pulling code from github repository *****'
-                git clone 'https://github.com/bdkakde/SBAFramework.git/',
+                git url: 'https://github.com/bdkakde/SBAFramework.git'
                  credentialsId: 'github_creds'
             }
         }
