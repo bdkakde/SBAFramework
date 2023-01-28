@@ -16,7 +16,4 @@ pipeline {
                      @runSerial
                 }
         }
-
-
-    }
 }
