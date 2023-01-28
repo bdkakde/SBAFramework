@@ -1,0 +1,46 @@
+2023-01-28 22:04:43,320 [main]  INFO  c.company.automation.steps.CucumberHook - Starting CucumberHook using Java 17.0.4 with PID 60664 (E:\Workspace\SBAFramework\build\classes\java\test started by Sai in E:\Workspace\SBAFramework)
+2023-01-28 22:04:43,322 [main]  INFO  c.company.automation.steps.CucumberHook - No active profile set, falling back to 1 default profile: "default"
+2023-01-28 22:04:44,797 [main]  INFO  c.c.automation.selenium.WebDriverFactory - --- Initializing headless chrome driver ----
+2023-01-28 22:04:46,123 [main]  INFO  i.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 109.0.5414.74 (resolved driver for Chrome 109)
+2023-01-28 22:04:46,198 [main]  INFO  i.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\Sai\.cache\selenium\chromedriver\win32\109.0.5414.74\chromedriver.exe
+2023-01-28 22:04:55,423 [main]  INFO  c.company.automation.steps.CucumberHook - Started CucumberHook in 13.292 seconds (process running for 16.907)
+2023-01-28 22:04:56,636 [main]  INFO  c.c.a.listerners.CustomCucumberListener - Scenario [verify product added to cart] started
+2023-01-28 22:04:56,641 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user open home page] STARTED
+2023-01-28 22:05:14,492 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user open home page] FINISHED and PASSED
+2023-01-28 22:05:14,531 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user login to application] STARTED
+2023-01-28 22:05:22,805 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user login to application] FINISHED and PASSED
+2023-01-28 22:05:22,807 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user search product by name "4K TV"] STARTED
+2023-01-28 22:05:26,285 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user search product by name "4K TV"] FINISHED and PASSED
+2023-01-28 22:05:26,286 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [I found search results] STARTED
+2023-01-28 22:05:26,540 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [I found search results] FINISHED and PASSED
+2023-01-28 22:05:26,541 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on product] STARTED
+2023-01-28 22:05:26,974 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on product] FINISHED and PASSED
+2023-01-28 22:05:26,975 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on add to cart] STARTED
+2023-01-28 22:05:35,601 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on add to cart] FINISHED and PASSED
+2023-01-28 22:05:35,602 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify product added message] STARTED
+2023-01-28 22:05:40,520 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify product added message] FINISHED and PASSED
+2023-01-28 22:05:40,520 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on cart button] STARTED
+2023-01-28 22:05:43,414 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user click on cart button] FINISHED and PASSED
+2023-01-28 22:05:43,415 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify product added to cart] STARTED
+2023-01-28 22:05:43,697 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify product added to cart] FINISHED and PASSED
+2023-01-28 22:05:43,991 [main]  INFO  c.c.a.listerners.CustomCucumberListener - Scenario [verify product added to cart] completed
+2023-01-28 22:05:43,992 [main]  INFO  c.c.a.listerners.CustomCucumberListener - SCENARIO : verify product added to cart -> PASSED
+2023-01-28 22:05:44,861 [main]  INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.company.automation.steps.CucumberHook]: CucumberHook does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-01-28 22:05:44,865 [main]  INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.company.automation.SpringSeleniumCucumberApplication for test class com.company.automation.steps.CucumberHook
+2023-01-28 22:05:44,886 [main]  INFO  c.c.a.listerners.CustomCucumberListener - Scenario [verify product deleted from the cart] started
+2023-01-28 22:05:44,887 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user open home page] STARTED
+2023-01-28 22:05:44,888 [main]  INFO  c.c.automation.selenium.WebDriverFactory - --- Initializing headless chrome driver ----
+2023-01-28 22:05:44,950 [main]  INFO  i.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 109.0.5414.74 (resolved driver for Chrome 109)
+2023-01-28 22:05:44,998 [main]  INFO  i.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\Sai\.cache\selenium\chromedriver\win32\109.0.5414.74\chromedriver.exe
+2023-01-28 22:05:57,039 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user open home page] FINISHED and PASSED
+2023-01-28 22:05:57,040 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user login to application] STARTED
+2023-01-28 22:06:03,513 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user login to application] FINISHED and PASSED
+2023-01-28 22:06:03,515 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [User click on cart link] STARTED
+2023-01-28 22:06:07,460 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [User click on cart link] FINISHED and PASSED
+2023-01-28 22:06:07,461 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user remove products from cart] STARTED
+2023-01-28 22:06:07,531 [main]  INFO  c.c.automation.pages.ShoppingCartPage - Number of items found in cart is 7
+2023-01-28 22:06:08,035 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user remove products from cart] FINISHED and FAILED
+2023-01-28 22:06:08,041 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify products removed from cart] STARTED
+2023-01-28 22:06:08,043 [main]  INFO  c.c.a.listerners.CustomCucumberListener - STEP [user verify products removed from cart] FINISHED and SKIPPED
+2023-01-28 22:06:08,101 [main]  INFO  c.c.a.listerners.CustomCucumberListener - Scenario [verify product deleted from the cart] completed
+2023-01-28 22:06:08,104 [main]  INFO  c.c.a.listerners.CustomCucumberListener - SCENARIO : verify product deleted from the cart -> FAILED
