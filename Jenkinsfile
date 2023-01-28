@@ -6,7 +6,7 @@ pipeline {
         stage('Clean') {
                     steps {
                          echo '***** Cleaning workspace *****'
-                         clean
+
                     }
              }
 
@@ -27,7 +27,7 @@ pipeline {
           stage('Publish Reports') {
                  steps {
                         echo "***** Publish Reports *****"
-                        allure serve allure-results
+
                         echo '***** Report generated successfully *****'
                  }
           }
