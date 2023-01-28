@@ -18,18 +18,14 @@ pipeline {      // declarative pipeline
             {
               bat 'gradle runSerial'
             }
+        }
 
-            post {
-                            // If Maven was able to run the tests, even if some of the test
-                            // failed, record the test results and archive the jar file.
-                            success { allure([
-                                includeProperties: false,
-                                jdk: '',
-                                properties: [],
-                                reportBuildPolicy: 'ALWAYS',
-                                results: [[path: 'allure-results']]
-                            ])
-                        }
+        stage ('Report')          // generate report
+        {
+            steps
+            {
+              bat 'allure serve allure-results'
+             }
         }
 
      }
