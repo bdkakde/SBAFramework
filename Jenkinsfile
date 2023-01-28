@@ -3,13 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clean') {
-                    steps {
-                         echo '***** Cleaning workspace *****'
-
-                    }
-
-
         stage('Clone Git Repo') {
             steps {
                 echo '***** Pulling code from github repository *****'
@@ -22,23 +15,8 @@ pipeline {
                      echo '***** Execution started for scenarios *****'
                      @runSerial
                 }
+        }
 
 
-          stage('Publish Reports') {
-                 steps {
-                        echo "***** Publish Reports *****"
-
-                        echo '***** Report generated successfully *****'
-                 }
-
-
-          stage('Deploy') {
-          			steps {
-          				echo "***** Deploying... *****"
-          			}
-          		}
-          		}
-          		}
-          		}
     }
 }
