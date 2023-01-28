@@ -8,7 +8,7 @@ pipeline {
                          echo '***** Cleaning workspace *****'
 
                     }
-             }
+
 
         stage('Clone Git Repo') {
             steps {
@@ -22,7 +22,7 @@ pipeline {
                      echo '***** Execution started for scenarios *****'
                      @runSerial
                 }
-         }
+
 
           stage('Publish Reports') {
                  steps {
@@ -30,12 +30,15 @@ pipeline {
 
                         echo '***** Report generated successfully *****'
                  }
-          }
+
 
           stage('Deploy') {
           			steps {
           				echo "***** Deploying... *****"
           			}
+          		}
+          		}
+          		}
           		}
     }
 }
