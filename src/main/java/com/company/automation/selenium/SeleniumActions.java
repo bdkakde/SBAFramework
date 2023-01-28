@@ -2,12 +2,11 @@ package com.company.automation.selenium;
 
 import com.company.automation.exceptions.ActionFailedException;
 import com.company.automation.reporter.AllureReportManager;
-import io.qameta.allure.Allure;
-import org.openqa.selenium.NoSuchWindowException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
+import java.util.function.Function;
 
 @Component
 public class SeleniumActions extends BasePage {
@@ -35,6 +38,9 @@ public class SeleniumActions extends BasePage {
     @Value("${implicit.wait}")
     private int implicitWait;
 
+    @Value("${page.timeout}")
+    private int pageTimeout;
+
     private String locator(WebElement element) {
         String[] locator = element.toString().split("->");
         return locator[1].replace("]", "");
@@ -46,6 +52,7 @@ public class SeleniumActions extends BasePage {
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
             allureReportManager.passStep("Application [%s] opened successfully", url);
+
         } catch (Exception e) {
             e.printStackTrace();
             allureReportManager.failStep("Failed to open Application [%s]", url);
@@ -72,7 +79,7 @@ public class SeleniumActions extends BasePage {
             allureReportManager.passStep("Clicked on element [%s] successfully", element);
         } catch (Exception e) {
             e.printStackTrace();
-            allureReportManager.failStep("Failed to click on element [%s]", element);
+            allureReportManager.failStep("Failed to click on element [%s] due to exception %s", element, e);
             throw new ActionFailedException(e.getMessage());
         }
     }
@@ -98,7 +105,7 @@ public class SeleniumActions extends BasePage {
         try {
             wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
             wait.until(ExpectedConditions.visibilityOfAllElements(elements));
-            for(WebElement element : elements) {
+            for (WebElement element : elements) {
                 if (element.isDisplayed()) {
                     allureReportManager.passStep("Element [%s] found successfully", locator(element));
                 } else {
@@ -131,6 +138,28 @@ public class SeleniumActions extends BasePage {
         return flag;
     }
 
+    public void implicitWait() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
+    }
+
+    public void waitForPageLoad(int timeout) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+    }
+
+    public void explicitWait(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void fluentWait(WebElement element) {
+
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(30L))
+                .pollingEvery(Duration.ofSeconds(1L))
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void switchToNewWindow(int num) {
         try {
             int numWindow = driver.getWindowHandles().size();
@@ -156,15 +185,15 @@ public class SeleniumActions extends BasePage {
         boolean flag = false;
         waitForElementVisible(element);
         try {
-           actualText = element.getText();
-           if(actualText.equals(expectedText)) {
-               flag = true;
-               allureReportManager.passStep("Actual text [%s] and Expected text [%s] are matched", actualText, expectedText);
-           }
+            actualText = element.getText();
+            if (actualText.equals(expectedText)) {
+                flag = true;
+                allureReportManager.passStep("Actual text [%s] and Expected text [%s] are matched", actualText, expectedText);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             allureReportManager.failStep("Actual text [%s] and Expected text [%s] are not matched matched", actualText, expectedText);
-            throw new ActionFailedException(e.getMessage());
+            throw new AssertionError(e.getMessage());
         }
         return flag;
     }
@@ -191,6 +220,24 @@ public class SeleniumActions extends BasePage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getHttpResponseCode(String url) {
+        int res = 0;
+        // establish, open connection with URL
+        HttpURLConnection cn = null;
+        try {
+            cn = (HttpURLConnection) new URL(url).openConnection();
+            // set HEADER request
+            cn.setRequestMethod("HEAD");
+            // connection initiate
+            cn.connect();
+            //get response code
+            res = cn.getResponseCode();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
     }
 }
 

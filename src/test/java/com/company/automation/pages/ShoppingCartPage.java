@@ -34,15 +34,13 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void removeProductsFromCart() {
-        int count = 0;
+
+        LOGGER.info("Number of items found in cart is " + deleteBtn.size());
+
         for (WebElement element : deleteBtn) {
-            while (deleteBtn.size() > 0) {
-                seleniumActions.clickElement(element);
-                count++;
-            }
+            seleniumActions.clickElement(element);
+
         }
-        System.out.println(count);
-        LOGGER.info("All items in cart deleted successfully");
     }
 
     public boolean verifyCartIsEmpty() {

@@ -11,8 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.Objects;
 
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
@@ -25,6 +27,9 @@ public class AllureReportManager {
 
     @Autowired
     protected WebDriver driver;
+
+    @Value("${screenshot.after.every.step}")
+    private String screenShotAfterEveryStep;
 
     private final Logger LOGGER = LoggerFactory.getLogger(AllureReportManager.class);
 
@@ -42,8 +47,7 @@ public class AllureReportManager {
                         .put("Executed By", environmentUtils.getSystemUser())
                         .put("Home Name", Objects.requireNonNull(environmentUtils.getHostName()))
                         .put("IP Address", Objects.requireNonNull(environmentUtils.getSystemIpAddress()))
-                        .build(), System.getProperty("user.dir") + "/" + "allure-results" + "/");
-
+                        .build(), System.getProperty("user.dir") + File.separator + "allure-results" + File.separator);
     }
 
     public void passStep(String message, Object... arg) {
