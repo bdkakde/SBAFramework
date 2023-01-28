@@ -1,19 +1,32 @@
-pipeline {
+pipeline {      // declarative pipeline
+
     agent any
 
-    stages {
-
-        stage('Clone Git Repo') {
-            steps {
-                echo '***** Pulling code from github repository *****'
-                git url: 'https://github.com/bdkakde/SBAFramework.git'
-                 @credentialsId github_creds
+    stages
+    {
+        stage('checkout from SCM repo')
+        {
+            steps
+            {
+               git 'https://github.com/bdkakde/SBAFramework.git'
             }
         }
-         stage('Run Tests') {
-                steps {
-                     echo '***** Execution started for scenarios *****'
-                     @runSerial
-                }
+
+        stage ('Test')          // run tests
+        {
+            steps
+            {
+              bat 'gradle runSerial'
+            }
         }
+
+               stage ('Report')          // run tests
+                {
+                    steps
+                    {
+                      bat 'allure serve allure-results'
+                    }
+                }
+     }
 }
+
