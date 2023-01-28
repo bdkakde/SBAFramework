@@ -14,13 +14,13 @@ pipeline {
             steps {
                 echo '***** Pulling code from github repository *****'
                 git url: 'https://github.com/bdkakde/SBAFramework.git'
-                 credentialsId: 'github_creds'
+                 @credentialsId: 'github_creds'
             }
         }
          stage('Run Tests') {
                 steps {
                      echo '***** Execution started for scenarios *****'
-                     runSerial
+                     @runSerial
                 }
          }
 
