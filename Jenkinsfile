@@ -10,7 +10,7 @@ pipeline {
         stage('Clean') {
                     steps {
                          echo '***** Cleaning workspace *****'
-                         gradle clean
+                         clean
                     }
              }
 
@@ -24,7 +24,7 @@ pipeline {
          stage('Run Tests') {
                 steps {
                      echo '***** Execution started for scenarios *****'
-                     gradle runSerial tests
+                     runSerial tests
                 }
          }
 
