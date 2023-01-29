@@ -18,9 +18,8 @@ pipeline {      // declarative pipeline
             {
               bat 'gradle runSerial'
             }
-        }
-
-      stage('Reports') {
+            
+                  stage('Reports') {
               steps {
                  allure([
             	   includeProperties: false,
@@ -31,6 +30,9 @@ pipeline {      // declarative pipeline
           	   ])
         	}
           }
+        }
+
+
 
      }
 }
