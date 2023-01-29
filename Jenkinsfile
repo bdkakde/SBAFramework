@@ -21,7 +21,7 @@ pipeline {      // declarative pipeline
         }
 
         stage('Publish') {
-                echo 'Publish Allure report'
+
                 publishHTML(
                         target: [
                                 allowMissing         : false,
