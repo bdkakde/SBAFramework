@@ -20,19 +20,17 @@ pipeline {      // declarative pipeline
             }
         }
 
-        stage('Publish') {
-
-                publishHTML(
-                        target: [
-                                allowMissing         : false,
-                                alwaysLinkToLastBuild: false,
-                                keepAll              : true,
-                                reportDir            : 'allure-results',
-                                reportFiles          : 'index.html',
-                                reportName           : "Allure Report"
-                        ]
-                )
-            }
+      stage('Reports') {
+              steps {
+                 allure([
+            	   includeProperties: false,
+            	   jdk: '',
+            	   properties: [],
+            	   reportBuildPolicy: 'ALWAYS',
+            	   results: [[path: 'allure-results']]
+          	   ])
+        	}
+          }
 
      }
 }
