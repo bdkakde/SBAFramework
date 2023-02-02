@@ -34,16 +34,13 @@ pipeline {      // declarative pipeline
                 results: [[path: 'target/allure-results']]
               ])
             }
+             emailext to: "${recipientEmails}",
+             subject: "Test Email",
+             body: "Test"
+
           }
          }
 
-                post{
-                      always{
-                         emailext to: "${recipientEmails}",
-                           subject: "Test Email",
-                              body: "Test"
-                           }
-                }
 
        }
 
