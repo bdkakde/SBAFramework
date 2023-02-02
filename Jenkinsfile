@@ -36,15 +36,18 @@ pipeline {      // declarative pipeline
             }
           }
          }
+
+                post{
+                      always{
+                         emailext to: "${recipientEmails}",
+                           subject: "Test Email",
+                              body: "Test"
+                           }
+                }
+
        }
 
-       post{
-             always{
-                emailext to: "${recipientEmails}",
-                  subject: "Test Email",
-                     body: "Test"
-                  }
-       }
+
 
     }
 }
