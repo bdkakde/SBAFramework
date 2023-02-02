@@ -3,7 +3,7 @@ pipeline {      // declarative pipeline
     agent any
 
     environment {
-            recipientEmails = "bdkakde@gmail.com, ubkakde@gmail.com"
+            recipientEmails = "bdkakde@gmail.com"
         }
 
     stages
