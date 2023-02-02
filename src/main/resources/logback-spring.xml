@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd.HHmmss" />
+    <property name="HOME_LOG" value="logs/execution.log"/>
+
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/execution.log</file>
-        <encoder>
-            <!--<pattern>%d [%thread] %-5level %-50logger{40} - %msg%n</pattern>-->
-            <pattern>%d [%thread]  %-5level %-30logger{40} - %msg%n</pattern>
-        </encoder>
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.FileAppender">
+        <file>${HOME_LOG}</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>execution-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>1MB</maxFileSize>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>10MB</totalSizeCap>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <fileNamePattern>logs/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
     </appender>
 
     <root level="INFO">

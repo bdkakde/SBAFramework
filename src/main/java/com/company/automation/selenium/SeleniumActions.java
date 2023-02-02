@@ -239,5 +239,9 @@ public class SeleniumActions extends BasePage {
         }
         return res;
     }
+
+    public void refreshPage() {
+        driver.navigate().refresh();
+    }
 }
 

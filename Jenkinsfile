@@ -2,6 +2,10 @@ pipeline {      // declarative pipeline
 
     agent any
 
+    environment {
+            recipientEmails = "bdkakde@gmail.com, ubkakde@gmail.com"
+        }
+
     stages
     {
         stage('checkout from SCM repo')
@@ -19,7 +23,7 @@ pipeline {      // declarative pipeline
               bat 'gradle runSerial'
             }
             
-             post {
+        post {
           always {
             script {
               allure([
@@ -31,11 +35,17 @@ pipeline {      // declarative pipeline
               ])
             }
           }
-          }
-        }
+         }
+       }
 
+       post{
+             always{
+                emailext to: "${recipientEmails}",
+                  subject: "Test Email",
+                     body: "Test"
+                  }
+       }
 
-
-     }
+    }
 }
 

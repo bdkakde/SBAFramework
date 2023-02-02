@@ -35,11 +35,18 @@ public class ShoppingCartPage extends BasePage {
 
     public void removeProductsFromCart() {
 
+        boolean flag = false;
+
         LOGGER.info("Number of items found in cart is " + deleteBtn.size());
 
         for (WebElement element : deleteBtn) {
-            seleniumActions.clickElement(element);
-
+            if(!seleniumActions.isElementVisible(cartEmptyHdr)) {
+                seleniumActions.clickElement(element);
+                flag = true;
+            }
+        }
+        if(!flag) {
+            LOGGER.info("Cart is empty");
         }
     }
 
