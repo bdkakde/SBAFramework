@@ -33,20 +33,22 @@ pipeline {      // declarative pipeline
                 reportBuildPolicy: 'ALWAYS',
                 results: [[path: 'target/allure-results']]
               ])
-                          emailext to: "${recipientEmails}",
-                           subject: "Test Email",
-                           body: "Test"
+
             }
-
-
           }
          }
 
 
        }
-
-
-
     }
+
+    post{
+            always{
+                emailext to: "${recipientEmails}",
+                subject: "Test Email",
+                body: "Test",
+                attachLog: true
+            }
+        }
 }
 
