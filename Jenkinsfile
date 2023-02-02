@@ -33,10 +33,11 @@ pipeline {      // declarative pipeline
                 reportBuildPolicy: 'ALWAYS',
                 results: [[path: 'target/allure-results']]
               ])
+                          emailext to: "${recipientEmails}",
+                           subject: "Test Email",
+                           body: "Test"
             }
-             emailext to: "${recipientEmails}",
-             subject: "Test Email",
-             body: "Test"
+
 
           }
          }
