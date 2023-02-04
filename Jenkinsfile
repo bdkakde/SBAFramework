@@ -3,7 +3,9 @@ pipeline {      // declarative pipeline
     agent any
 
     environment {
+            fromEmail = "bdkakde@rediffmail.com"
             recipientEmails = "bdkakde@gmail.com"
+            APP_NAME = 'Amazon'
         }
 
     stages
@@ -40,13 +42,13 @@ pipeline {      // declarative pipeline
 
     stage('Email Jenkins Pipeline') {
          steps {
-          mail bcc: '',
+          mail subject: 'Email Jenkins Pipeline',
           body: 'Hello, This is an email from jenkins pipeline.',
+          attachmentsPattern: 'allure-report.zip'
+          from: '${fromEmail}',
+          to: '${recipientEmails}'
           cc: '',
-          from: 'bdkakde@gmail.com',
-          replyTo: '',
-          subject: 'EmailJenkinsPipeline',
-          to: 'bdkakde@gmail.com'
+          bcc: ''
          }
     }
   }
