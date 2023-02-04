@@ -44,7 +44,6 @@ pipeline {      // declarative pipeline
                 mail to: "${recipientEmails}",
                 subject: "Test Email",
                 body: "Test",
-                attachLog: true
             }
         }
 }
