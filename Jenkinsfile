@@ -42,7 +42,7 @@ pipeline {      // declarative pipeline
 
    stage("Email"){
    			steps{
-   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report", body: readFile("target/allure-results"), mimeType: 'text/html');
+   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report", body: readFile("allure"), mimeType: 'text/html');
    			}
    		}
    	}
