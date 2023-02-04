@@ -40,16 +40,11 @@ pipeline {      // declarative pipeline
          }
         }
 
-    stage('Email Jenkins Pipeline') {
-         steps {
-          mail
-          subject: 'Email'
-          body: 'Hello, This is an email from jenkins pipeline.'
-          attachmentsPattern: 'allure-report.zip'
-          from: "bdkakde@rediffmail.com'
-          to: 'bdkakde@rediffmail.com'
-         }
-    }
+   stage("Email"){
+   			steps{
+   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report from - '${env.JOB_NAME}' ", body: readFile("allure-results"), mimeType: 'text/html');
+   			}
+   		}
   }
 
 
