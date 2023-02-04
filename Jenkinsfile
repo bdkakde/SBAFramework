@@ -36,6 +36,7 @@ pipeline {      // declarative pipeline
             }
           }
          }
+        }
 
     stage('Email Jenkins Pipeline') {
          steps {
@@ -48,9 +49,7 @@ pipeline {      // declarative pipeline
           to: 'bdkakde@gmail.com'
          }
     }
-
-       }
-    }
+  }
 
 /*     post{
             always{
