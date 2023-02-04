@@ -42,7 +42,7 @@ pipeline {      // declarative pipeline
 
     stage('Email Jenkins Pipeline') {
          steps {
-          mail subject: 'Email',body: 'Hello, This is an email from jenkins pipeline.',attachmentsPattern: 'allure-report.zip'from: "bdkakde@rediffmail.com',to: 'bdkakde@rediffmail.com',cc: '',bcc: ''
+          mail subject: 'Email',body: 'Hello, This is an email from jenkins pipeline.',attachmentsPattern: 'allure-report.zip'from: "bdkakde@rediffmail.com',to: 'bdkakde@rediffmail.com'
          }
     }
   }
