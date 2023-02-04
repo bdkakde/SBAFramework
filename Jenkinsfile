@@ -36,15 +36,28 @@ pipeline {      // declarative pipeline
             }
           }
          }
+
+    stage('Email Jenkins Pipeline') {
+         steps {
+          mail bcc: '',
+          body: 'Hello, This is an email from jenkins pipeline.',
+          cc: '',
+          from: 'bdkakde@gmail.com',
+          replyTo: '',
+          subject: 'EmailJenkinsPipeline',
+          to: 'bdkakde@gmail.com'
+         }
+    }
+
        }
     }
 
-    post{
+/*     post{
             always{
                 mail to: "${recipientEmails}",
                 subject: "Test Email",
                 body: "Test"
             }
-        }
+        } */
 }
 
