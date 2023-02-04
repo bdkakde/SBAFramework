@@ -42,10 +42,10 @@ pipeline {      // declarative pipeline
 
     stage('Email Jenkins Pipeline') {
          steps {
-          mail subject: 'Email Jenkins Pipeline',
+          mail subject: 'Email',
           body: 'Hello, This is an email from jenkins pipeline.',
           attachmentsPattern: 'allure-report.zip'
-          from: 'bdkakde@rediffmail.com',
+          from: "bdkakde@rediffmail.com',
           to: 'bdkakde@rediffmail.com',
           cc: '',
           bcc: ''
@@ -53,12 +53,4 @@ pipeline {      // declarative pipeline
     }
   }
 
-/*     post{
-            always{
-                mail to: "${recipientEmails}",
-                subject: "Test Email",
-                body: "Test"
-            }
-        } */
-}
 
