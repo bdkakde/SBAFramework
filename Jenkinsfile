@@ -45,6 +45,7 @@ pipeline {      // declarative pipeline
    				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report from - '${env.JOB_NAME}' ", body: readFile("allure-results"), mimeType: 'text/html');
    			}
    		}
+   	}
   }
 
 
