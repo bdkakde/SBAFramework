@@ -41,7 +41,7 @@ pipeline {      // declarative pipeline
 
     post{
             always{
-                emailext to: "${recipientEmails}",
+                mail to: "${recipientEmails}",
                 subject: "Test Email",
                 body: "Test",
                 attachLog: true
