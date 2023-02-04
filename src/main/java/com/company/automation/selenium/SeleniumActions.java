@@ -4,10 +4,7 @@ import com.company.automation.exceptions.ActionFailedException;
 import com.company.automation.reporter.AllureReportManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -242,6 +239,46 @@ public class SeleniumActions extends BasePage {
 
     public void refreshPage() {
         driver.navigate().refresh();
+    }
+
+    public WebDriverWait getWebDriverWait() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
+        return wait;
+    }
+
+    public void highLightElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+    }
+
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = getWebDriverWait();
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+                }
+                catch (Exception e) {
+                    // no jQuery present
+                    return true;
+                }
+            }
+        };
+
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return ((JavascriptExecutor)driver).executeScript("return document.readyState")
+                        .toString().equals("complete");
+            }
+        };
+
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 }
 

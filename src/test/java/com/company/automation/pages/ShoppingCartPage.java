@@ -34,19 +34,12 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void removeProductsFromCart() {
-
-        boolean flag = false;
-
         LOGGER.info("Number of items found in cart is " + deleteBtn.size());
+        for (int i = 0; i < deleteBtn.size(); i++) {
+            LOGGER.info("%%%%%%%%% " + deleteBtn.get(i));
+            seleniumActions.waitForElementVisible(deleteBtn.get(i));
+            seleniumActions.clickElement(deleteBtn.get(i));
 
-        for (WebElement element : deleteBtn) {
-            if(!seleniumActions.isElementVisible(cartEmptyHdr)) {
-                seleniumActions.clickElement(element);
-                flag = true;
-            }
-        }
-        if(!flag) {
-            LOGGER.info("Cart is empty");
         }
     }
 
