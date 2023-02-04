@@ -42,7 +42,7 @@ pipeline {      // declarative pipeline
 
    stage("Email"){
    			steps{
-   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report", body: readFile("\\archive\\allure-report.zip\\allure-report\\index.html"), mimeType: 'text/html');
+   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report", body: readFile("C:\\Users\\Sai\\.jenkins\\workspace\\SBAFramework_CICD\\allure-report"), mimeType: 'text/html');
    			}
    		}
    	}
