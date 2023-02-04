@@ -45,8 +45,8 @@ pipeline {      // declarative pipeline
           mail subject: 'Email Jenkins Pipeline',
           body: 'Hello, This is an email from jenkins pipeline.',
           attachmentsPattern: 'allure-report.zip'
-          from: "${fromEmail}",
-          to: "${recipientEmails}",
+          from: 'bdkakde@rediffmail.com',
+          to: 'bdkakde@rediffmail.com',
           cc: '',
           bcc: ''
          }
