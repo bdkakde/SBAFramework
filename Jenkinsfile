@@ -43,7 +43,6 @@ pipeline {      // declarative pipeline
    stage("Email"){
    			steps{
                     emailext body: 'Test Message',
-                    recipientProviders: [developers(), requestor()],
                     subject: 'Test Subject',
                     to: 'bdkakde@gmail.com'
    			}
