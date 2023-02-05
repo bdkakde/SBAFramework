@@ -40,14 +40,12 @@ pipeline {      // declarative pipeline
          }
         }
 
-   stage("Email"){
-   			steps{
-
-   				emailext attachLog: true, attachmentsPattern: 'target/allure-results',
-                                body: "Test mail",
-                                recipientProviders: "bdkakde@gmail.com",
-                                subject: "Automation Status"
-   			}
-   		}
+ stage("Email"){
+    			steps{
+                     emailext body: 'Test Message',
+                     subject: 'Test Subject',
+                     to: 'bdkakde@gmail.com'
+    			}
+    		}
    	}
   }
