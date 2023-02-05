@@ -24,7 +24,7 @@ pipeline {      // declarative pipeline
             {
               bat 'gradle runSerial'
             }
-            
+
         post {
           always {
             script {
@@ -40,12 +40,12 @@ pipeline {      // declarative pipeline
          }
         }
 
- stage("Email"){
-    			steps{
-                     emailext body: 'Test Message',
-                     subject: 'Test Subject',
-                     to: 'bdkakde@gmail.com'
-    			}
-    		}
+   stage("Email"){
+   			steps{
+                    emailext body: 'Test Message',
+                    subject: 'Test Subject',
+                    to: 'bdkakde@gmail.com'
+   			}
+   		}
    	}
   }
