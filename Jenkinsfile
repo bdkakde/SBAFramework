@@ -42,7 +42,11 @@ pipeline {      // declarative pipeline
 
    stage("Email"){
    			steps{
-   				emailext (to: 'bdkakde@gmail.com', replyTo: 'bdkakde@gmail.com', subject: "Email Report", body: readFile("C:\\Users\\Sai\\.jenkins\\workspace\\SBAFramework_CICD\\allure-report"), mimeType: 'text/html');
+
+   				emailext attachLog: true, attachmentsPattern: 'target/allure-results',
+                                body: "Test mail",
+                                recipientProviders: "bdkakde@gmail.com",
+                                subject: "Automation Status"
    			}
    		}
    	}
