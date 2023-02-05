@@ -44,9 +44,9 @@ pipeline {      // declarative pipeline
    			steps{
 
    				emailext attachLog: true, attachmentsPattern: 'target/allure-results',
-                                body: "Test mail",
-                                recipientProviders: "bdkakde@gmail.com",
-                                subject: "Automation Status"
+                                body: 'Test mail',
+                                recipientProviders: 'bdkakde@gmail.com',
+                                subject: Automation Status
    			}
    		}
    	}
