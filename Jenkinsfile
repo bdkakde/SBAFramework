@@ -42,12 +42,10 @@ pipeline {      // declarative pipeline
 
    stage("Email"){
    			steps{
-                    archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccessful: false
-                    echo 'I will always say Hello again!'
-   				    emailext attachLog: true, attachmentsPattern: 'target/allure-results',
-                                body: 'Test mail',
-                                recipientProviders: 'bdkakde@gmail.com',
-                                subject: Automation Status
+                    emailext body: 'Test Message',
+                    recipientProviders: [developers(), requestor()],
+                    subject: 'Test Subject',
+                    to: 'bdkakde@gmail.com'
    			}
    		}
    	}
