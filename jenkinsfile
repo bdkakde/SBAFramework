@@ -44,7 +44,7 @@ pipeline {      // declarative pipeline
               always{
                       mail to: "bdkakde@gmail.com",
                       subject: "Test Email",
-                      body: "Test",
+                      body: "Test"
 
                     }
             }
