@@ -42,9 +42,13 @@ pipeline {      // declarative pipeline
 
    stage("Email"){
    			steps{
-                    emailext body: 'Test Message',
-                    subject: 'Test Subject',
-                    to: 'bdkakde@gmail.com'
+                     post{
+                            always{
+                                mail to: "bdkakde@gmail.com",
+                                subject: "Test Email",
+                                body: "Test"
+                            }
+                        }
    			}
    		}
    	}
