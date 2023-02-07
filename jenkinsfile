@@ -7,7 +7,6 @@ pipeline {      // declarative pipeline
             recipientEmails = "bdkakde@gmail.com"
             APP_NAME = 'Amazon'
         }
-
     stages
     {
         stage('checkout from SCM repo')
@@ -40,6 +39,7 @@ pipeline {      // declarative pipeline
          }
         }
 
+        }
         post{
               always{
                       mail to: "bdkakde@gmail.com",
