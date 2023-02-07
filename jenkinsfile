@@ -47,5 +47,5 @@ pipeline {      // declarative pipeline
                       body: "Test"
                       }
             }
-   	}
+
   }
