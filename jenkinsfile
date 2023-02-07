@@ -38,7 +38,7 @@ pipeline {      // declarative pipeline
           }
          }
         }
-
+    }
 
         post{
               always{
