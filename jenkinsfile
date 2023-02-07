@@ -39,12 +39,12 @@ pipeline {      // declarative pipeline
          }
         }
 
-        }
+
         post{
               always{
                       mail to: "bdkakde@gmail.com",
                       subject: "Test Email",
                       body: "Test"
                     }
-
+        }
   }
