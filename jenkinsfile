@@ -45,7 +45,7 @@ pipeline {      // declarative pipeline
                       mail to: "bdkakde@gmail.com",
                       subject: "Test Email",
                       body: "Test",
-                      attachLog: true
+
                     }
             }
 
