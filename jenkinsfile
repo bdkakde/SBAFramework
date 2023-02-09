@@ -40,12 +40,25 @@ pipeline {      // declarative pipeline
         }
     }
 
-        post{
+ /*        post{
               always{
                       mail to: "${recipientEmails}",
                       subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
 
                     }
-        }
+        } */
+
+            post {
+                failure {
+                    emailext attachmentsPattern: 'allure-report.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                            subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
+                            mimeType: 'text/html',to: "bdkakde@gmail.com"
+                    }
+                 success {
+                       emailext attachmentsPattern: 'allure-report.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                            subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+                            mimeType: 'text/html',to: "bdkakde@gmail.com"
+                  }
+            }
   }
