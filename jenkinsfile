@@ -42,7 +42,7 @@ pipeline {      // declarative pipeline
 
         post{
               always{
-                      mail to: "bdkakde@gmail.com",
+                      mail to: "${recipientEmails}",
                       subject: "Test Email",
                       body: "Test"
                     }
