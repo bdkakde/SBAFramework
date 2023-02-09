@@ -27,4 +27,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Execute test cases
-      run: gradle runSerial
+      run: sh gradle runSerial
