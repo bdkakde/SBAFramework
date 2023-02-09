@@ -42,9 +42,11 @@ pipeline {      // declarative pipeline
 
         post{
               always{
+              archiveArtifacts artifacts: '*.html', onlyIfSuccessful: false
                       mail to: "${recipientEmails}",
                       subject: "Test Email",
-                      body: "Test"
+                      body: "Test",
+                      attachmentsPattern: '*.html'
                     }
         }
   }
