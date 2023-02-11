@@ -63,6 +63,7 @@ public class HomePage extends BasePage {
     }
 
     public SearchResultPage searchProduct(String input) {
+        seleniumActions.sleep(5);
         seleniumActions.enterText(searchTxb, input);
         seleniumActions.clickElement(searchBtn);
         return new SearchResultPage();
