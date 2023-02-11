@@ -46,7 +46,7 @@ public class SeleniumActions extends BasePage {
     public void launchApplication(String url) {
         try {
             driver.get(url);
-            driver.manage().window().maximize();
+            //driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
             allureReportManager.passStep("Application [%s] opened successfully", url);
 
