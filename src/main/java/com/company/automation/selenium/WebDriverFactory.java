@@ -34,6 +34,7 @@ public class WebDriverFactory {
     @Bean
     @ConditionalOnProperty(name = "browser", havingValue = "headless chrome")
     public WebDriver initializeHeadlessChromeDriver() {
+        LOGGER.info("---- Execution on OS: " + System.getProperty("os.name"));
         LOGGER.info("--- Initializing headless chrome driver ----");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
