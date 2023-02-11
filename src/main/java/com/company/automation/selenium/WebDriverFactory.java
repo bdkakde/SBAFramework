@@ -36,6 +36,7 @@ public class WebDriverFactory {
     public WebDriver initializeHeadlessChromeDriver() {
         LOGGER.info("--- Initializing headless chrome driver ----");
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--headless");
         WebDriverManager.chromedriver().disableCsp().setup();
         return new ChromeDriver(chromeOptions);
