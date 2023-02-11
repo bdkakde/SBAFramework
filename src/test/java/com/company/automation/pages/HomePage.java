@@ -56,7 +56,6 @@ public class HomePage extends BasePage {
     public void loginToApplication() {
 
         seleniumActions.clickElement(signInAccountLink);
-        //seleniumActions.clickElement(signInLink);
         seleniumActions.enterText(emailOrPhoneNumberTxb, "9923374848");
         seleniumActions.clickElement(continueBtn);
         seleniumActions.enterText(passwordTxb, PasswordUtils.getDecodedPassword("Z2hhdHJhaTEyIUA="));
