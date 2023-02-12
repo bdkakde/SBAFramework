@@ -36,7 +36,9 @@ public class CustomCucumberListener implements ConcurrentEventListener {
         if (event.getTestCase() != null) {
             TestCase testCase = event.getTestCase();
             String scenarioName = testCase.getName();
+            LOGGER.info("********************************************************************");
             LOGGER.info("Scenario [{}] started", scenarioName);
+            LOGGER.info("********************************************************************");
         }
     }
 
@@ -44,8 +46,10 @@ public class CustomCucumberListener implements ConcurrentEventListener {
         if (event.getTestCase() != null) {
             TestCase testCase = event.getTestCase();
             String scenarioName = testCase.getName();
+            LOGGER.info("********************************************************************");
             LOGGER.info("Scenario [{}] completed", scenarioName);
             LOGGER.info("SCENARIO : " + scenarioName + " -> " + event.getResult().getStatus());
+            LOGGER.info("********************************************************************");
         }
 
     }
