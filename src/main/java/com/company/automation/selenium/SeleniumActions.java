@@ -86,13 +86,14 @@ public class SeleniumActions extends BasePage {
         try {
             wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
             wait.until(ExpectedConditions.visibilityOf(element));
-            if (element.isDisplayed()) {
+            //if (element.isDisplayed()) {
                 allureReportManager.passStep("Element [%s] found successfully", locator(element));
-            } else {
+            //} else {
                 allureReportManager.failStep("Failed to found element [%s] ", locator(element));
-            }
+           // }
         } catch (Exception e) {
             e.printStackTrace();
+            allureReportManager.failStep("Failed to found element [%s] ", locator(element));
             throw new AssertionError(e.getMessage());
         }
     }
