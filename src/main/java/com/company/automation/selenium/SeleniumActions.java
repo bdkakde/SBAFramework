@@ -81,19 +81,19 @@ public class SeleniumActions extends BasePage {
         }
     }
 
-    public void waitForElementVisible(WebElement element) {
+    public void waitForElementVisible(final WebElement element) {
 
+        wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
         try {
-            wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
+
             wait.until(ExpectedConditions.visibilityOf(element));
-            //if (element.isDisplayed()) {
+            if (element.isDisplayed()) {
                 allureReportManager.passStep("Element [%s] found successfully", locator(element));
-            //} else {
+            } else {
                 allureReportManager.failStep("Failed to found element [%s] ", locator(element));
-           // }
-        } catch (Exception e) {
+            }
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
-            allureReportManager.failStep("Failed to found element [%s] ", locator(element));
             throw new AssertionError(e.getMessage());
         }
     }
