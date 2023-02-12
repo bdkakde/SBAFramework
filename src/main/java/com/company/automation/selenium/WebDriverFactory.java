@@ -16,8 +16,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
+import java.net.Inet4Address;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 @Configuration
 @Profile("!remote")
@@ -51,6 +53,11 @@ public class WebDriverFactory {
     @ConditionalOnProperty(name = "browser", havingValue = "remote chrome")
     public WebDriver initializeHeadlessRemoteChromeDriver() {
         LOGGER.info("---- Execution on OS: " + System.getProperty("os.name"));
+        try {
+            LOGGER.info("---- IP Address: " + Inet4Address.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
         LOGGER.info("--- Initializing headless chrome driver ----");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
