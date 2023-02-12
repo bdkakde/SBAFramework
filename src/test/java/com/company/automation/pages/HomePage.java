@@ -33,7 +33,7 @@ public class HomePage extends BasePage {
     @FindBy(id="signInSubmit")
     public WebElement signInBtn;
 
-    @FindBy(id="twotabsearchtextbox")
+    @FindBy(xpath="//input[@type='text' and @id='twotabsearchtextbox']")
     public WebElement searchTxb;
 
     @FindBy(id="nav-search-submit-button")
