@@ -64,7 +64,7 @@ public class CustomCucumberListener implements ConcurrentEventListener {
     private void testStepFinishedHandler(TestStepFinished event) {
         if (event.getTestStep() instanceof PickleStepTestStep testStep) {
             String stepName = testStep.getStep().getText();
-            LOGGER.info("STEP [{}] FINISHED and {}", stepName, event.getResult().getStatus());
+            LOGGER.info("STEP [{}] {}", stepName, event.getResult().getStatus());
         }
     }
 
