@@ -42,6 +42,9 @@ public class HomePage extends BasePage {
     @FindBy(id="nav-cart-count-container")
     public WebElement cartLink;
 
+    @FindBy(xpath="//span[.='Hello, Baban']")
+    public WebElement loginSuccessful;
+
     @Value("${app.url}")
     private String appURL;
 
@@ -60,6 +63,10 @@ public class HomePage extends BasePage {
         seleniumActions.clickElement(continueBtn);
         seleniumActions.enterText(passwordTxb, PasswordUtils.getDecodedPassword("Z2hhdHJhaTEyIUA="));
         seleniumActions.clickElement(signInBtn);
+    }
+
+    public boolean verifyLoginSuccessful() {
+       return seleniumActions.isElementVisible(loginSuccessful);
     }
 
     public SearchResultPage searchProduct(String input) {

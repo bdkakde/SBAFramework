@@ -55,4 +55,9 @@ public class HomePageSteps {
     public void userClickOnCartLink() {
         homePage.clickCartLink();
     }
+
+    @Then("user verify if login successful")
+    public void userVerifyIfLoginSuccessful() {
+        Assert.assertTrue(homePage.verifyLoginSuccessful(), "Login failed");
+    }
 }

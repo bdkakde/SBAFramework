@@ -1,9 +1,10 @@
 Feature: As a user, I want to check cart details
 
   @login
-  Scenario: verify product added to cart
+  Scenario: verify Login
     Given user open home page
     When user login to application
+    Then user verify if login successful
 
 
   @cart-added
