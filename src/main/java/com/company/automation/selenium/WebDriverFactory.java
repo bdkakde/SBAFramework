@@ -64,7 +64,7 @@ public class WebDriverFactory {
         //chromeOptions.addArguments("--headless");
         WebDriverManager.chromedriver().disableCsp().setup();
         try {
-            return new RemoteWebDriver(new URL("fv-az411-293:4444"),chromeOptions);
+            return new RemoteWebDriver(new URL("http://10.1.0.88/4444/wd/hub"),chromeOptions);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
