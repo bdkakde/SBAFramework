@@ -21,7 +21,8 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: window-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -30,7 +31,7 @@ jobs:
       with:
         java-version: '17'
         distribution: zulu
-    - name: Build with Gradle
+    - name: Run Selenium Tests
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: runSerial
