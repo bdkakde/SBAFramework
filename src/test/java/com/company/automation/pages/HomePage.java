@@ -66,6 +66,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean verifyLoginSuccessful() {
+        seleniumActions.waitForElementVisible(loginSuccessful);
        return seleniumActions.isElementVisible(loginSuccessful);
     }
 
