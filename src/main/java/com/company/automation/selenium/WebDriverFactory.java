@@ -55,6 +55,7 @@ public class WebDriverFactory {
         LOGGER.info("---- Execution on OS: " + System.getProperty("os.name"));
         try {
             LOGGER.info("---- IP Address: " + Inet4Address.getLocalHost().getHostAddress());
+            LOGGER.info("---- PORT: " + Inet4Address.getLocalHost().getAddress());
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
