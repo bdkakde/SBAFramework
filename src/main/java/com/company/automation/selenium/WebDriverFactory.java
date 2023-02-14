@@ -52,20 +52,23 @@ public class WebDriverFactory {
     @Bean
     @ConditionalOnProperty(name = "browser", havingValue = "remote chrome")
     public WebDriver initializeHeadlessRemoteChromeDriver() {
-        LOGGER.info("---- Execution on OS: " + System.getProperty("os.name"));
+        String hostIP = "";
+                LOGGER.info("---- Execution on OS: " + System.getProperty("os.name"));
         try {
             LOGGER.info("---- IP Address: " + Inet4Address.getLocalHost().getHostAddress());
-            LOGGER.info("---- PORT: " + Inet4Address.getLocalHost().getAddress());
+            hostIP = Inet4Address.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
+
+
         LOGGER.info("--- Initializing headless chrome driver ----");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
-        //chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless");
         WebDriverManager.chromedriver().disableCsp().setup();
         try {
-            return new RemoteWebDriver(new URL("http://10.1.0.69/4444/wd/hub"),chromeOptions);
+            return new RemoteWebDriver(new URL("http://" + hostIP + "/4444/wd/hub"),chromeOptions);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
