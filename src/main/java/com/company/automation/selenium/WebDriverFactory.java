@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 
+import java.io.File;
 import java.net.Inet4Address;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,10 +55,11 @@ public class WebDriverFactory {
     public WebDriver initializeHeadlessRemoteChromeDriver() {
 
         LOGGER.info("--- Initializing headless chrome driver ----");
+        LOGGER.info("--- Path: " + new File(".").getAbsolutePath());
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--headless");
-        WebDriverManager.chromedriver().disableCsp().setup();
+        WebDriverManager.chromedriver().setup();
         return new ChromeDriver(chromeOptions);
 
     }

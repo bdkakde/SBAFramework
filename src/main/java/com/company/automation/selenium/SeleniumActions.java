@@ -2,6 +2,7 @@ package com.company.automation.selenium;
 
 import com.company.automation.exceptions.ActionFailedException;
 import com.company.automation.reporter.AllureReportManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -243,8 +245,7 @@ public class SeleniumActions extends BasePage {
     }
 
     public WebDriverWait getWebDriverWait() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
-        return wait;
+        return new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
     }
 
     public void highLightElement(WebElement element) {
@@ -261,9 +262,8 @@ public class SeleniumActions extends BasePage {
             @Override
             public Boolean apply(WebDriver driver) {
                 try {
-                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
-                }
-                catch (Exception e) {
+                    return ((Long) ((JavascriptExecutor) driver).executeScript("return jQuery.active") == 0);
+                } catch (Exception e) {
                     // no jQuery present
                     return true;
                 }
@@ -274,12 +274,27 @@ public class SeleniumActions extends BasePage {
         ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor)driver).executeScript("return document.readyState")
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState")
                         .toString().equals("complete");
             }
         };
 
         return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
+    public void takeSnapShot(String fileWithPath) {
+
+        try {
+            TakesScreenshot scrShot = ((TakesScreenshot) driver);
+            File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+            File DestFile = new File(fileWithPath);
+            FileUtils.copyFile(SrcFile, DestFile);
+            LOGGER.info("Screenshot taken at location: " + DestFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info("Screenshot could not be taken");
+        }
+
     }
 }
 

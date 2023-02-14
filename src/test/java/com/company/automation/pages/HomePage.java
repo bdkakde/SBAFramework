@@ -9,40 +9,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class HomePage extends BasePage {
 
     @Autowired
     public SeleniumActions seleniumActions;
 
-    @FindBy(xpath="//a[@id='nav-link-accountList']")
+    @FindBy(xpath = "//a[@id='nav-link-accountList']")
     public WebElement signInAccountLink;
 
-    @FindBy(xpath="//div[@class='nav-signin-tt nav-flyout'][contains(@style,'display: block;')]")
+    @FindBy(xpath = "//div[@class='nav-signin-tt nav-flyout'][contains(@style,'display: block;')]")
     public WebElement signInLink;
 
-    @FindBy(id="ap_email")
+    @FindBy(id = "ap_email")
     public WebElement emailOrPhoneNumberTxb;
 
-    @FindBy(id="continue")
+    @FindBy(id = "continue")
     public WebElement continueBtn;
 
-    @FindBy(id="ap_password")
+    @FindBy(id = "ap_password")
     public WebElement passwordTxb;
 
-    @FindBy(id="signInSubmit")
+    @FindBy(id = "signInSubmit")
     public WebElement signInBtn;
 
-    @FindBy(xpath="//input[@type='text' and @id='twotabsearchtextbox']")
+    @FindBy(xpath = "//input[@type='text' and @id='twotabsearchtextbox']")
     public WebElement searchTxb;
 
-    @FindBy(id="nav-search-submit-button")
+    @FindBy(id = "nav-search-submit-button")
     public WebElement searchBtn;
 
-    @FindBy(id="nav-cart-count-container")
+    @FindBy(id = "nav-cart-count-container")
     public WebElement cartLink;
 
-    @FindBy(xpath="//span[.='Hello, Baban']")
+    @FindBy(xpath = "//span[.='Hello, Baban']")
     public WebElement loginSuccessful;
 
     @Value("${app.url}")
@@ -67,7 +69,8 @@ public class HomePage extends BasePage {
 
     public boolean verifyLoginSuccessful() {
         seleniumActions.waitForElementVisible(loginSuccessful);
-       return seleniumActions.isElementVisible(loginSuccessful);
+        seleniumActions.takeSnapShot(new File(".").getPath());
+        return seleniumActions.isElementVisible(loginSuccessful);
     }
 
     public SearchResultPage searchProduct(String input) {
