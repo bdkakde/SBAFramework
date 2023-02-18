@@ -50,9 +50,11 @@ pipeline {      // declarative pipeline
         } */
 
             post {
+            always {
                emailext body: "The build has finished. Please find the Allure report attached.",
                         subject: "Build Report",
                         attachmentsPattern: 'allure-report/**',
                         to: "bdkakde@gmail.com"
+            }
             }
   }
