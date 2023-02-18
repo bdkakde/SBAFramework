@@ -38,3 +38,10 @@ jobs:
       with:
         arguments: runSerial
       continue-on-error: true
+
+    - name: Generate Allure report
+      run: gradle allure:report
+          - name: Publish Allure report
+            uses: peaceiris/actions-allure@v1
+            with:
+              allure-version: '2.20.1'
