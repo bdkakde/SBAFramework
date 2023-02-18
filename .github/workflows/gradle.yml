@@ -40,8 +40,10 @@ jobs:
       continue-on-error: true
 
     - name: Generate Allure report
-      run: gradle allure:report
-          - name: Publish Allure report
-            uses: peaceiris/actions-allure@v1
-            with:
-              allure-version: '2.20.1'
+      run: ./gradlew allureReport
+
+    - name: Publish Allure report
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report
+        path: build/reports/allure-report
