@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+
 @CucumberContextConfiguration
 @SpringBootTest()
 public class CucumberHook {
@@ -21,6 +23,7 @@ public class CucumberHook {
 
     @After
     public void afterStep(Scenario scenario) {
+        System.out.println("%%%%%%%%%% " + System.getProperty("user.dir") + File.separator + "target" + File.separator + "allure-results" + File.separator);
 
     }
 }

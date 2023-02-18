@@ -34,7 +34,7 @@ public class AllureReportManager {
     private final Logger LOGGER = LoggerFactory.getLogger(AllureReportManager.class);
 
     public void setAllureEnvironmentInformation() {
-
+        System.out.println("%%%%%%%%%% " + System.getProperty("user.dir") + File.separator + "target" + File.separator + "allure-results" + File.separator);
         allureEnvironmentWriter(
                 ImmutableMap.<String, String>builder()
                         .put("Browser", environmentUtils.getBrowserName(driver))
@@ -47,7 +47,8 @@ public class AllureReportManager {
                         .put("Executed By", environmentUtils.getSystemUser())
                         .put("Home Name", Objects.requireNonNull(environmentUtils.getHostName()))
                         .put("IP Address", Objects.requireNonNull(environmentUtils.getSystemIpAddress()))
-                        .build(), System.getProperty("user.dir") + File.separator + "allure-results" + File.separator);
+                        .build(), System.getProperty("user.dir") + File.separator + "target" + File.separator + "allure-results" + File.separator);
+
     }
 
     public void passStep(String message, Object... arg) {

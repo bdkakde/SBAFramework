@@ -24,37 +24,26 @@ pipeline {      // declarative pipeline
               bat 'gradle runSerial'
             }
 
-        post {
-          always {
-            script {
-              allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'target/allure-results']]
-              ])
+            post {
+                    always {
+                      allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                      ])
+                    }
             }
-          }
-         }
+       }
+
+        stage('Email Report') {
+            steps {
+                emailext body: 'Please find the Allure report attached.',
+                 subject: 'Allure Report',
+                 attachmentsPattern: 'target/allure-results/*.html',
+                 to: 'bdkakde@gmail.com'
+            }
         }
     }
-
- /*        post{
-              always{
-                      mail to: "${recipientEmails}",
-                      subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
-                       body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
-
-                    }
-        } */
-
-            post {
-            always {
-               emailext body: "The build has finished. Please find the Allure report attached.",
-                        subject: "Build Report",
-                        attachmentsPattern: 'allure-report/**',
-                        to: "bdkakde@gmail.com"
-            }
-            }
-  }
+ }

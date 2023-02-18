@@ -70,7 +70,6 @@ public class HomePage extends BasePage {
     public boolean verifyLoginSuccessful() {
         seleniumActions.sleep(10);
         seleniumActions.waitForElementVisible(loginSuccessful);
-        seleniumActions.takeSnapShot(new File(".").getPath());
         return seleniumActions.isElementVisible(loginSuccessful);
     }
 
