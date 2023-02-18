@@ -50,19 +50,9 @@ pipeline {      // declarative pipeline
         } */
 
             post {
-                failure {
-                    emailext attachmentsPattern: 'allure-report.zip',
-                            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL},
-                            subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
-                            mimeType: 'text/html',
-                            to: "bdkakde@gmail.com"
-                    }
-                 success {
-                       emailext attachmentsPattern: 'allure-report.zip',
-                            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL},
-                            subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
-                            mimeType: 'text/html',
-                            to: "bdkakde@gmail.com"
-                  }
+               emailext body: "The build has finished. Please find the Allure report attached.",
+                        subject: "Build Report",
+                        attachmentsPattern: 'allure-report/**',
+                        to: "bdkakde@gmail.com"
             }
   }
