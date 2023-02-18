@@ -41,7 +41,7 @@ pipeline {      // declarative pipeline
             steps {
                 emailext body: 'Please find the Allure report attached.',
                  subject: 'Allure Report',
-                 attachmentsPattern: 'target/allure-results/*.html',
+                 attachmentsPattern: 'allure-report.zip',
                  to: 'bdkakde@gmail.com'
             }
         }
