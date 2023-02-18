@@ -45,5 +45,5 @@ jobs:
     - name: Publish Allure report
       uses: actions/upload-artifact@v2
       with:
-        name: allure-report
-        path: build/reports/allure-report
+        name: target/allure-results
+        path: build/target/allure-results
