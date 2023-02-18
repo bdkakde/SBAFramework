@@ -18,12 +18,4 @@ import java.io.File;
 @SpringBootTest()
 public class CucumberHook {
 
-
-    private final Logger LOGGER = LoggerFactory.getLogger(CucumberHook.class);
-
-    @After
-    public void afterStep(Scenario scenario) {
-        System.out.println("%%%%%%%%%% " + System.getProperty("user.dir") + File.separator + "target" + File.separator + "allure-results" + File.separator);
-
-    }
 }

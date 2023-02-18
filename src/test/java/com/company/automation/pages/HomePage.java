@@ -68,9 +68,7 @@ public class HomePage extends BasePage {
     }
 
     public boolean verifyLoginSuccessful() {
-        seleniumActions.sleep(10);
-        seleniumActions.waitForElementVisible(loginSuccessful);
-        return seleniumActions.isElementVisible(loginSuccessful);
+       return seleniumActions.isElementVisible(loginSuccessful);
     }
 
     public SearchResultPage searchProduct(String input) {

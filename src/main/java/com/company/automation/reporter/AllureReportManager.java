@@ -34,7 +34,7 @@ public class AllureReportManager {
     private final Logger LOGGER = LoggerFactory.getLogger(AllureReportManager.class);
 
     public void setAllureEnvironmentInformation() {
-        System.out.println("%%%%%%%%%% " + System.getProperty("user.dir") + File.separator + "target" + File.separator + "allure-results" + File.separator);
+
         allureEnvironmentWriter(
                 ImmutableMap.<String, String>builder()
                         .put("Browser", environmentUtils.getBrowserName(driver))
